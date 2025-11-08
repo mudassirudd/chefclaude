@@ -30,6 +30,7 @@ export default function Main() {
                 />
                 <button>Add ingredient</button>
             </form>
+           { ingredients.length<4 &&  <p style={{textAlign:"center"}}>{`Please add  ${4- ingredients.length} more`}.</p>}
 
             {ingredients.length > 0 &&
                 <IngredientsList
