@@ -8,10 +8,16 @@ export default function Main() {
         []
     )
     const [recipe, setRecipe] = React.useState("")
+    const [isLoading,setisloading ] = React.useState(false)
 
     async function getRecipe() {
+        setisloading(true)
         const recipeMarkdown = await getRecipeFromMistral(ingredients)
         setRecipe(recipeMarkdown)
+        if (recipeMarkdown) {
+            setisloading(false)
+            
+        }
     }
 
     function addIngredient(formData) {
@@ -38,6 +44,8 @@ export default function Main() {
                     getRecipe={getRecipe}
                 />
             }
+
+                {isLoading && <small>Loading... the chef takes about 45s</small>}
 
             {recipe && <ClaudeRecipe recipe={recipe} />}
         </main>
